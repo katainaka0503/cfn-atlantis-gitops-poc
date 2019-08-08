@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: 2010-09-09
+Parameters:
+  RCU:
+    Type: Number
+  WCU:
+    Type: Number
+Resources:
+  Table:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: HogeKey
+          AttributeType: S
+      KeySchema:
+        - AttributeName: HogeKey
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: !Ref RCU
+        WriteCapacityUnits: !Ref WCU
+Outputs:
+  TableName:
+    Value: !Ref Table
+    Description: Table name

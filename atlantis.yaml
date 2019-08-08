@@ -1,0 +1,17 @@
+version: 3
+automerge: true
+projects:
+  - name: hoge
+    dir: cloudformation/hoge
+    autoplan:
+      when_modified: ["*"]
+      enabled: true
+    workflow: cloudformation
+workflows:
+  cloudformation:
+    plan:
+      steps:
+        - run: cfn-plan.sh $(basename $(pwd)) template.yaml parameters.txt
+    apply:
+      steps:
+        - run: cfn-apply.sh $(basename $(pwd)) template.yaml parameters.txt
